@@ -100,36 +100,52 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 
 		switch(code) {
 			case KeyEvent.VK_UP:
-				if(orangeCycle.dir != 3)
-						orangeCycle.dir = 1;
+				if(orangeCycle.dir != 3 && !orangeCycle.hasChangedDir) {
+					orangeCycle.dir = 1;
+					orangeCycle.hasChangedDir = true;
+				}
 				break;
 			case KeyEvent.VK_RIGHT:
-				if(orangeCycle.dir != 4)
-						orangeCycle.dir = 2;
+				if(orangeCycle.dir != 4 && !orangeCycle.hasChangedDir) {
+					orangeCycle.dir = 2;
+					orangeCycle.hasChangedDir = true;
+				}
 				break;
 			case KeyEvent.VK_DOWN:
-				if(orangeCycle.dir != 1)
-						orangeCycle.dir = 3;
+				if(orangeCycle.dir != 1 && !orangeCycle.hasChangedDir) {
+					orangeCycle.dir = 3;
+					orangeCycle.hasChangedDir = true;
+				}
 				break;
 			case KeyEvent.VK_LEFT:
-				if(orangeCycle.dir != 2)
-						orangeCycle.dir = 4;
+				if(orangeCycle.dir != 2 && !orangeCycle.hasChangedDir) {
+					orangeCycle.dir = 4;
+					orangeCycle.hasChangedDir = true;
+				}
 				break;
 			case KeyEvent.VK_W:
-				if(blueCycle.dir != 3)
-						blueCycle.dir = 1;
+				if(blueCycle.dir != 3 && !blueCycle.hasChangedDir) {
+					blueCycle.dir = 1;
+					blueCycle.hasChangedDir = true;
+				}
 				break;
 			case KeyEvent.VK_D:
-				if(blueCycle.dir != 4)
-						blueCycle.dir = 2;
+				if(blueCycle.dir != 4 && !blueCycle.hasChangedDir) {
+					blueCycle.dir = 2;
+					blueCycle.hasChangedDir = true;
+				}
 				break;
 			case KeyEvent.VK_S:
-				if(blueCycle.dir != 1)
-						blueCycle.dir = 3;
+				if(blueCycle.dir != 1 && !blueCycle.hasChangedDir) {
+					blueCycle.dir = 3;
+					blueCycle.hasChangedDir = true;
+				}
 				break;
 			case KeyEvent.VK_A:
-				if(blueCycle.dir != 2)
-						blueCycle.dir = 4;
+				if(blueCycle.dir != 2 && !blueCycle.hasChangedDir) {
+					blueCycle.dir = 4;
+					blueCycle.hasChangedDir = true;
+				}
 				break;
 
 			default:
@@ -186,6 +202,7 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 				default: break;
 			}
 			cells[X][Y] = color;
+			hasChangedDir = false;
 		} 
 	}
 

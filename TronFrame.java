@@ -166,11 +166,18 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 		blueCycle.move(cellstates);
 		orangeCycle.move(cellstates);
 		this.repaint();
+		if(orangeCycle.X == blueCycle.X && orangeCycle.Y == blueCycle.Y) {
+			cellstates[orangeCycle.lX][orangeCycle.lY] = orangeCycle.color;
+			cellstates[blueCycle.lX][blueCycle.lY] = blueCycle.color;
+			cellstates[blueCycle.X][blueCycle.Y] = TronFrame.DEATH_COLOR;
+		}
 	}
 
 	private class TronCycle {
 		public int X;
 		public int Y;
+		private int lX;
+		private int lY;
 		public int dir;
 		public int color;
 		public int scolor;
@@ -213,17 +220,18 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 
 		public void move(int[][] cells) {
 			cells[X][Y] = color;
+			lX = X;
+			lY = Y;
 			moveForward();
 			if(X >= 0 && Y >= 0 && X < cells.length && Y < cells[X].length) {
 				if(cells[X][Y] == 0) {
 					cells[X][Y] = scolor;
 				}
 				else {	// hit trail
-					moveBackward();
-					cells[X][Y] = TronFrame.DEATH_COLOR;
-					moveForward();
+					//moveBackward();
+					cells[lX][lY] = TronFrame.DEATH_COLOR;
+					//moveForward();
 					isAlive = false;
-
 				}
 			}
 			else { // out of bounds

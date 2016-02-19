@@ -169,6 +169,8 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 			cellstates[orangeCycle.lX][orangeCycle.lY] = orangeCycle.color;
 			cellstates[blueCycle.lX][blueCycle.lY] = blueCycle.color;
 			cellstates[blueCycle.X][blueCycle.Y] = TronFrame.DEATH_COLOR;
+			blueCycle.isAlive = false;
+			orangeCycle.isAlive = false;
 		}
 	}
 

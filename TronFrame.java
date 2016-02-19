@@ -37,15 +37,6 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 	public static void main(String[] args) throws Exception {
 		TronFrame gameFrame = new TronFrame();
 		gameFrame.playGame();
-		//while(true) {
-		//	Thread.sleep(75);
-			//System.out.println("moving!");
-		//	gameFrame.act();
-			//gameFrame.repaint();
-		//}
-		//gameFrame.setResizable(false);
-		//Thread.sleep(1000);
-		//gameFrame.setResizable(false);
 	}
 
 	public int[][] cellstates;
@@ -68,17 +59,6 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 	public TronFrame() {
 		super("Tron Test");
 		addKeyListener(this);
-		//this.act();
-		//this.act();
-		/*System.out.println("matrix:");
-		for(int i = 0; i < 41; i ++) {
-			for(int j = 0; j < 41; j ++) {
-				if(cellstates[i][j] != 0) {
-					System.out.println(cellstates[i][j]);
-				}
-			}
-		} 
-		cellstates[0][0] = 1;*/
 		this.setResizable(false);
 		this.setSize(400,400); // somewhat irrelevant
 		this.setVisible(true);
@@ -183,11 +163,9 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 	}
 
 	public void act() {
-		//cellstates[blueCycle.X][blueCycle.Y] = 1;
 		blueCycle.move(cellstates);
 		orangeCycle.move(cellstates);
 		this.repaint();
-		//tp.repaint();
 	}
 
 	private class TronCycle {
@@ -234,36 +212,25 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 		}
 
 		public void move(int[][] cells) {
-			//System.out.println("mark1 val: " + cells[X][Y]);
-			//System.out.println("mycolor is " + color);
-			//cells[X][Y] = color;
-			//System.out.println("mark2 val: " + cells[X][Y]);
-			//System.out.println(color + " was at " + X + "," + Y);
 			cells[X][Y] = color;
 			moveForward();
 			if(X >= 0 && Y >= 0 && X < cells.length && Y < cells[X].length) {
 				if(cells[X][Y] == 0) {
 					cells[X][Y] = scolor;
 				}
-				else {
+				else {	// hit trail
 					moveBackward();
 					cells[X][Y] = TronFrame.DEATH_COLOR;
 					moveForward();
-					// hit trail
 					isAlive = false;
 
 				}
 			}
-			else {
-				// out of bounds
+			else { // out of bounds
 				isAlive = false;
 			}
 			hasChangedDir = false;
 		} 
-
-		public void preMove() {
-			// placeholder
-		}
 	}
 
 
@@ -300,7 +267,6 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 						g.fillRect(30+10*i+2,30+10*j+2,8,8);
 					}
 					else if(tmp == 3) {
-						System.out.println("drew some death");
 						g.setColor(deathColor);
 						g.fillRect(30+10*i+2,30+10*j+2,8,8);
 					}
@@ -314,12 +280,6 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 					}
 				}
 			}
-			//for(int i = 30; i < 371; i += 5) {
-			//	g.drawLine(30,i,370,i);
-			//	g.drawLine(i,30,i,370);
-			//}
-			//g.setColor(new Color(0,0,0));
-			//g.fillRect(30,30,212,212);
 		}
 
 		public Dimension getPreferredSize() {

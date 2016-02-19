@@ -36,6 +36,7 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 {
 	public static void main(String[] args) throws Exception {
 		TronFrame gameFrame = new TronFrame();
+		gameFrame.startAnimation(75);
 		gameFrame.playGame();
 	}
 
@@ -58,6 +59,9 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 
 	private int[] score;// = new int[5];
 
+	// starting position:
+	// blue: 10,20
+	// orange: 30,20
 	public TronFrame() {
 		super("Tron Test");
 		addKeyListener(this);
@@ -87,7 +91,7 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 	}
 
 	public void playGame(int tickspeed) throws Exception {
-		this.act();
+		//this.act();
 		while(blueCycle.isAlive && orangeCycle.isAlive) {
 			Thread.sleep(tickspeed);
 			this.act();
@@ -100,6 +104,19 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 		}
 		else {
 			System.out.println("It's a tie!");
+		}
+	}
+
+	public void startAnimation(int tickspeed) throws Exception {
+		for(int i = 0; i < 3; i ++) {
+			cellstates[10][20] = 1;
+			cellstates[30][20] = 2;
+			this.repaint();
+			Thread.sleep(5*tickspeed);
+			cellstates[10][20] = 0;
+			cellstates[30][20] = 0;
+			this.repaint();
+			Thread.sleep(2*tickspeed);
 		}
 	}
 

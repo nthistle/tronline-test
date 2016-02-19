@@ -56,6 +56,8 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 	public static final Color deathColor = new Color(200,0,0);
 	private TronPanel tp;
 
+	private int[] score;// = new int[5];
+
 	public TronFrame() {
 		super("Tron Test");
 		addKeyListener(this);
@@ -70,6 +72,12 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 		blueCycle = new TronCycle(10,20,2,1,4);
 		orangeCycle = new TronCycle(30,20,4,2,5);
 		cellstates = new int[41][41];
+		score = new int[5];
+		for(int i = 0; i < 5; i ++) {
+			score[i] = -1;
+		}
+		score[3] = 2;
+		score[1] = 1;
 		// cellstates: x, y
 	}
 
@@ -250,19 +258,23 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 		}
 
 		// 41 x 41
+		// 30 px barrier on top for score meter
 		public void paintComponent(Graphics g) {
 			//System.out.println("paintComponent called!");
 			super.paintComponent(g);
 			g.setColor(new Color(70,70,70));
-			g.fillRect(0,0,472,472);
+			g.fillRect(0,0,472,502);
+			g.setColor(new Color(35,35,35));
+			//g.fillRect(3,170,24,132);
+			g.fillRect(170,18,132,24);
 			g.setColor(new Color(0,0,0));
-			g.fillRect(30,30,412,412);
+			g.fillRect(30,60,412,412);
 			g.setColor(new Color(20,20,70));
 			for(int i = 0; i < 42; i ++) {
-				g.drawLine(30,30+10*i,441,30+10*i);
-				g.drawLine(30,30+10*i+1,441,30+10*i+1);
-				g.drawLine(30+10*i,30,30+10*i,441);
-				g.drawLine(30+10*i+1,30,30+10*i+1,441);
+				g.drawLine(30,60+10*i,441,60+10*i);
+				g.drawLine(30,60+10*i+1,441,60+10*i+1);
+				g.drawLine(30+10*i,60,30+10*i,471);
+				g.drawLine(30+10*i+1,60,30+10*i+1,471);
 			}
 			int tmp;
 			for(int i = 0; i < 41; i ++) {
@@ -270,30 +282,30 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 					tmp = cellstates[i][j];
 					if(tmp == 1) {
 						g.setColor(blueColor);
-						g.fillRect(30+10*i+2,30+10*j+2,8,8);
+						g.fillRect(30+10*i+2,60+10*j+2,8,8);
 					}
 					else if(tmp == 2) {
 						g.setColor(orangeColor);
-						g.fillRect(30+10*i+2,30+10*j+2,8,8);
+						g.fillRect(30+10*i+2,60+10*j+2,8,8);
 					}
 					else if(tmp == 3) {
 						g.setColor(deathColor);
-						g.fillRect(30+10*i+2,30+10*j+2,8,8);
+						g.fillRect(30+10*i+2,60+10*j+2,8,8);
 					}
 					else if(tmp == 4) {
 						g.setColor(blueRecentColor);
-						g.fillRect(30+10*i+2,30+10*j+2,8,8);
+						g.fillRect(30+10*i+2,60+10*j+2,8,8);
 					}
 					else if(tmp == 5) {
 						g.setColor(orangeRecentColor);
-						g.fillRect(30+10*i+2,30+10*j+2,8,8);
+						g.fillRect(30+10*i+2,60+10*j+2,8,8);
 					}
 				}
 			}
 		}
 
 		public Dimension getPreferredSize() {
-			return new Dimension(472,472);
+			return new Dimension(472,502);
 		}
 	}
 }

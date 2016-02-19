@@ -74,6 +74,7 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 	}
 
 	public void playGame() throws Exception {
+//		playGame(25);
 		playGame(75);
 	}
 

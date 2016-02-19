@@ -83,7 +83,6 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 			Thread.sleep(tickspeed);
 			this.act();
 		}
-		//this.repaint();
 		if(blueCycle.isAlive) {
 			System.out.println("Blue Cycle wins!");
 		}

@@ -32,13 +32,11 @@ import javax.swing.SwingUtilities;
 import java.awt.geom.AffineTransform;
 import java.lang.Math;
 
-public class TronFrame extends JFrame implements KeyListener//, ActionListener
+public class TronFrame extends JFrame implements KeyListener
 {
 	public static void main(String[] args) throws Exception {
 		TronFrame gameFrame = new TronFrame();
 		gameFrame.playSet();
-		//gameFrame.startAnimation();
-		//gameFrame.playGame();
 	}
 
 	public int[][] cellstates;
@@ -48,9 +46,9 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 	// 1 = blue
 	// 2 = orange
 	// 3 = death
-	public static final int DEATH_COLOR = 3;
 	// 4 = bluerecent
 	// 5 = orangerecent
+	public static final int DEATH_COLOR = 3;
 	public static final Color blueColor = new Color(0,0,255);
 	public static final Color orangeColor = new Color(255,150,0);
 	public static final Color blueRecentColor = new Color(50,50,255);
@@ -58,11 +56,7 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 	public static final Color deathColor = new Color(200,0,0);
 	private TronPanel tp;
 
-	private int[] scores;// = new int[5];
-
-	// starting position:
-	// blue: 10,20
-	// orange: 30,20
+	private int[] scores;
 	public TronFrame() {
 		super("Tron Test");
 		startStuff();
@@ -79,9 +73,6 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 		for(int i = 0; i < 5; i ++) {
 			scores[i] = -1;
 		}
-		//scores[3] = 2;
-		//scores[1] = 1;
-		// cellstates: x, y
 	}
 
 	public void playSet() throws Exception {
@@ -101,28 +92,20 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 	}
 
 	public int playGame() throws Exception {
-//		playGame(25);
 		return playGame(75);
 	}
 
 	public int playGame(int tickspeed) throws Exception {
-		//this.act();
 		while(blueCycle.isAlive && orangeCycle.isAlive) {
 			Thread.sleep(tickspeed);
 			this.act();
 		}
-		if(blueCycle.isAlive) {
-			System.out.println("Blue Cycle wins!");
+		if(blueCycle.isAlive)
 			return 1;
-		}
-		else if(orangeCycle.isAlive) {
-			System.out.println("Orange Cycle wins!");
+		else if(orangeCycle.isAlive)
 			return 2;
-		}
-		else {
-			System.out.println("It's a tie!");
+		else
 			return 3;
-		}
 	}
 
 	public void startStuff() {
@@ -274,16 +257,6 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 			}
 		}
 
-		private void moveBackward() {
-			switch(dir) {
-				case 1: Y++; break;
-				case 2: X--; break;
-				case 3: Y--; break;
-				case 4: X++; break;
-				default: break;
-			}
-		}
-
 		public void move(int[][] cells) {
 			if(dir == 5) {
 				dir = initDir;
@@ -297,9 +270,7 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 					cells[X][Y] = scolor;
 				}
 				else {	// hit trail
-					//moveBackward();
 					cells[lX][lY] = TronFrame.DEATH_COLOR;
-					//moveForward();
 					isAlive = false;
 				}
 			}
@@ -320,12 +291,9 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 		// 41 x 41
 		// 30 px barrier on top for score meter
 		public void paintComponent(Graphics g) {
-			//System.out.println("paintComponent called!");
 			super.paintComponent(g);
 			g.setColor(new Color(70,70,70));
 			g.fillRect(0,0,472,502);
-			//g.setColor(new Color(35,35,35));
-			//g.fillRect(3,170,24,132);
 			g.setColor(new Color(0,0,0));
 			g.fillRect(170,16,132,28);
 			g.fillRect(30,60,412,412);
@@ -336,7 +304,6 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 				g.drawLine(30+10*i,60,30+10*i,471);
 				g.drawLine(30+10*i+1,60,30+10*i+1,471);
 			}
-			// these lines go 1 over where they should (???)
 			g.drawLine(170,14,302,14);
 			g.drawLine(170,15,302,15);
 			g.drawLine(170,16,302,16);
@@ -345,7 +312,6 @@ public class TronFrame extends JFrame implements KeyListener//, ActionListener
 			g.drawLine(170,43,302,43);
 			g.drawLine(170,44,302,44);
 			g.drawLine(170,45,302,45);
-
 			g.drawLine(169,14,169,45);
 			g.drawLine(168,14,168,45);
 			g.drawLine(302,14,302,45);
